@@ -1,0 +1,139 @@
+<html>  
+<head>  
+    <title>upload</title>  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>  
+<body style="background-color: #F6F6F6;">  
+	<div clss="container">
+		<div class="heading">
+			<h2>Disease Prediction</h2>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<form id="upload-file" method="post" enctype="multipart/form-data">
+					<fieldset>
+	    				<label for="file" class="upload-label">Select The Dataset File :</label>
+	        			<input id="theFile" name="file" type="file" class="upload-ip">
+	        		</fieldset>
+	   				<button id="upload-file-btn" type="button" class="btn">Upload</button>
+	    		</form>
+			</div>
+			<div class="col-md-3"></div>
+    </div>
+
+      <div class="row">
+        <div class="col-md-2 radio_btn">
+          <input type="radio" id="random_forest" name="gender" value="random_forest">
+          <label for="random_forest">random_forest</label>
+        </div>
+
+        <div class="col-md-2 radio_btn">
+          <input type="radio" id="decision_tree" name="gender" value="decision_tree">
+        <label for="decision_tree">decision_tree</label>
+        </div>
+
+        <div class="col-md-2 radio_btn">
+          <input type="radio" id="knn" name="gender" value="knn">
+          <label for="knn">knn</label>
+        </div>
+
+        <div class="col-md-2 radio_btn">
+          <input type="radio" id="svm" name="gender" value="svm">
+          <label for="svm">svm</label>
+        </div>
+
+        <div class="col-md-2 radio_btn">
+          <input type="radio" id="Predict" name="gender" value="Predict">
+          <label for="Predict">Predict</label>
+        </div>
+
+        <div class="col-md-2">
+          <button id="result-btn">Get Result</button>
+        </div>
+
+    </div>
+    
+    <div id="response"></div>
+    <!-- Display graph and accuracy -->
+    <div>
+    	<div class="row">
+    		<div class="col-md-6" id="rf">
+    			
+    		</div>
+    		<div class="col-md-6" id="dt">
+    			
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-md-6" id="knn">
+    			
+    		</div>
+    		<div class="col-md-6" id="svm">
+    			
+    		</div>
+    	</div>
+    </div>
+
+        <script
+		  src="https://code.jquery.com/jquery-3.2.1.min.js"
+		  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		  crossorigin="anonymous"></script>
+   <script type="text/javascript">
+    $( document ).ready(function() {
+    	$('button#result-btn').click(function(){
+    	  var fileName=document.getElementById('theFile').files[0].name;
+          var radioValue = $("input[name='gender']:checked").val();
+        $.ajax({
+            url: "/"+radioValue+"/",
+            type: "POST",
+            data: {'data':fileName},
+            success: function(resp){
+            	if (radioValue == "random_forest") {
+            		$('div#rf').html(resp.data);
+            	}
+            	else if (radioValue == "decision_tree") {
+            		$('div#dt').html(resp.data);
+            	}
+            	else if (radioValue == "knn") {
+            		$('div#knn').html(resp.data);
+            	}
+            	else if (radioValue == "svm") {
+            		$('div#svm').html(resp.data);
+            	}
+            	else{
+            		$('div#response').append(resp.data);
+            	}
+                
+            }
+        });
+      });
+       $('#upload-file-btn').click(function() {
+            $('div#response').empty();
+            $('div#rf').empty();
+            $('div#dt').empty();
+            $('div#knn').empty();
+            $('div#svm').empty();
+	        var form_data = new FormData($('#upload-file')[0]);
+	        $.ajax({
+	            type: 'POST',
+	            url: '/uploadajax',
+	            data: form_data,
+	            contentType: false,
+	            cache: false,
+	            processData: false,
+	            success: function(resp){
+                	$('div#response').append(resp.data);
+            	}
+	        });
+	    });
+    });
+      
+  </script>
+</body>  
+</html>  

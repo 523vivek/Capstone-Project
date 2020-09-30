@@ -1,0 +1,74 @@
+.heading {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    text-align: center;
+    font-family: cursive;
+    color: forestgreen;
+}
+.heading h2 {
+    font-size: 50px;
+}
+label.upload-label {
+    font-family: cursive;
+    font-size: 18px;
+    color: currentColor;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+input.upload-ip {
+    margin-left: 215px;
+    font-family: cursive;
+}
+fieldset {
+    display: inline-block;
+}
+button#upload-file-btn {
+    font-family: cursive;
+    border: 1px solid #000000;
+    padding: 8px 20px;
+    border-radius: 9px;
+}
+div#response {
+    margin-top: 50px;
+    border-top: solid 1px #333;
+    padding-top: 50px;
+    font-family: cursive;
+    font-size: 18px;
+}
+.row.success-row {
+    margin-top: 15px;
+}
+.radio_btn {
+    text-align: center;
+    font-family: cursive;
+    font-size: 18px;
+    display: inline-block;
+    margin-top: 50px;
+}
+/*div#result {
+    margin-top: 50px;
+    border-top: solid 1px #333;
+    padding-top: 50px;
+    font-family: cursive;
+    font-size: 18px;
+}*/
+button#result-btn {
+    font-family: cursive;
+    padding: 8px 20px;
+    margin-top: 50px;
+    border-radius: 9px;
+
+}
+img.graph-img {
+    height: 350px;
+    width: auto;
+}
+.data {
+    margin: 50px;
+    background-color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 30px;
+    -moz-box-shadow: 7px 10px 10px 0px rgba(143,139,143,1);
+    box-shadow: 7px 10px 10px 0px rgba(143,139,143,1);
+    padding-bottom: 30px;
+}
